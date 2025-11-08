@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const xmlbuilder = require('xmlbuilder');
 const { pool } = require('../../database');
+
 const router = Router();
 
 router.get('/endpoint', async (req, res) => {
@@ -9,10 +10,11 @@ router.get('/endpoint', async (req, res) => {
     FROM endpoints
     LIMIT 1
   `;
+  
   const { rows } = await pool.query(query);
 
   if (!rows || rows.length === 0) {
-    return res.status(404).send('No endpoint found');
+    return res.status(404);
   }
 
   const endpointData = rows[0];
