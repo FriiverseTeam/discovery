@@ -10,6 +10,10 @@ const serve = express();
 
 serve.use(routes);
 
+serve.get('/', (req, res) => {
+    res.redirect('/v1/endpoint');
+})
+
 serve.listen(process.env.PORT, async () => {
     database.connectDB();
     logger.success(`Discovery started on port ${process.env.PORT}.`);
